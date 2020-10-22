@@ -29,7 +29,7 @@ Then, initialize it with the correct credentials:
 $gateway->initialize([
     'username' => $username, 
     'secret' => $secret,
-    'api_region' => $region, // Optional, may be Gateway::API_VERSION_EUROPE (default) or Gateway::API_VERSION_NORTH_AMERICA
+    'api_region' => $region, // Optional, may be Gateway::API_VERSION_EUROPE (default), Gateway::API_VERSION_NORTH_AMERICA or Gateway::API_VERSION_OCEANIA
     'testMode' => false // Optional, default: true
 ]);
 // or 

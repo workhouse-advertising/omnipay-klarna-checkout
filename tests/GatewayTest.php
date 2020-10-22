@@ -37,6 +37,8 @@ final class GatewayTest extends GatewayTestCase
             [false, Gateway::API_VERSION_EUROPE, Gateway::EU_BASE_URL],
             [true, Gateway::API_VERSION_NORTH_AMERICA, Gateway::NA_TEST_BASE_URL],
             [false, Gateway::API_VERSION_NORTH_AMERICA, Gateway::NA_BASE_URL],
+            [true, Gateway::API_VERSION_OCEANIA, Gateway::OC_TEST_BASE_URL],
+            [false, Gateway::API_VERSION_OCEANIA, Gateway::OC_BASE_URL],
         ];
     }
 

@@ -19,11 +19,14 @@ final class Gateway extends AbstractGateway implements GatewayInterface
 {
     const API_VERSION_EUROPE = 'EU';
     const API_VERSION_NORTH_AMERICA = 'NA';
+    const API_VERSION_OCEANIA = 'OC';
 
     const EU_BASE_URL = 'https://api.klarna.com';
     const EU_TEST_BASE_URL = 'https://api.playground.klarna.com';
     const NA_BASE_URL = 'https://api-na.klarna.com';
     const NA_TEST_BASE_URL = 'https://api-na.playground.klarna.com';
+    const OC_BASE_URL = 'https://api-oc.klarna.com';
+    const OC_TEST_BASE_URL = 'https://api-oc.playground.klarna.com';
 
     /**
      * @inheritdoc
@@ -201,12 +204,15 @@ final class Gateway extends AbstractGateway implements GatewayInterface
 
     private function setBaseUrl()
     {
+        // TODO: Probably reasonable to change this to a case statement.
         if (self::API_VERSION_EUROPE === $this->getApiRegion()) {
             $this->parameters->set('base_url', $this->getTestMode() ? self::EU_TEST_BASE_URL : self::EU_BASE_URL);
-
-            return;
+        } elseif (self::API_VERSION_OCEANIA === $this->getApiRegion()) {
+            $this->parameters->set('base_url', $this->getTestMode() ? self::OC_TEST_BASE_URL : self::OC_BASE_URL);
+        } else {
+            $this->parameters->set('base_url', $this->getTestMode() ? self::NA_TEST_BASE_URL : self::NA_BASE_URL);
         }
 
-        $this->parameters->set('base_url', $this->getTestMode() ? self::NA_TEST_BASE_URL : self::NA_BASE_URL);
+        // TODO: Throw an Exception?
     }
 }
