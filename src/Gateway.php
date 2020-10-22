@@ -15,7 +15,7 @@ use MyOnlineStore\Omnipay\KlarnaCheckout\Message\VoidRequest;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Message\RequestInterface;
 
-final class Gateway extends AbstractGateway implements GatewayInterface
+class Gateway extends AbstractGateway implements GatewayInterface
 {
     const API_VERSION_EUROPE = 'EU';
     const API_VERSION_NORTH_AMERICA = 'NA';
