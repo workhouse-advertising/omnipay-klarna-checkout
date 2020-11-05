@@ -12,7 +12,7 @@ use Omnipay\Common\Http\Exception\RequestException;
 /**
  * Creates a Klarna HPP order if it does not exist
  */
-class AuthorizeRequest extends AbstractOrderRequest
+class UpdateSessionRequest extends AbstractOrderRequest
 {
     use PaymentUrlsDataTrait;
 
@@ -24,15 +24,17 @@ class AuthorizeRequest extends AbstractOrderRequest
     public function getData()
     {
         $this->validate(
-            'session_id'
+            'amount',
+            'currency',
+            'items',
+            'locale',
+            'purchase_country',
+            'tax_amount',
+            'session_id',
         );
 
         $data = $this->getOrderData();
-        $data['payment_session_url'] = $this->getBaseUrl() . '/payments/v1/sessions/' . $this->getSessionId();
-        $data['merchant_urls'] = $this->getPaymentMerchantUrls();
-
-        // TODO: Consider making this configurable.
-        $data['options']['place_order_mode'] = 'PLACE_ORDER';
+        // $data['merchant_urls'] = $this->getMerchantUrls();
 
         return $data;
     }
@@ -64,12 +66,13 @@ class AuthorizeRequest extends AbstractOrderRequest
      */
     public function sendData($data)
     {
-        $response = $this->sendRequest('POST', '/hpp/v1/sessions', $data);
+        // Update a payment session
+        $response = $this->sendRequest('POST', '/payments/v1/sessions/' . $this->getSessionId(), $data);
 
         if ($response->getStatusCode() >= 400) {
             throw new InvalidResponseException($response->getReasonPhrase());
         }
 
-        return new AuthorizeResponse($this, $this->getResponseBody($response));
+        return new UpdateSessionResponse($this, $this->getResponseBody($response));
     }
 }

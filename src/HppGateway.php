@@ -6,6 +6,7 @@ namespace MyOnlineStore\Omnipay\KlarnaCheckout;
 use MyOnlineStore\Omnipay\KlarnaCheckout\Message\Hpp\AuthorizeRequest;
 use MyOnlineStore\Omnipay\KlarnaCheckout\Message\Hpp\CompleteAuthorizeRequest;
 use MyOnlineStore\Omnipay\KlarnaCheckout\Message\Hpp\CreateSessionRequest;
+use MyOnlineStore\Omnipay\KlarnaCheckout\Message\Hpp\UpdateSessionRequest;
 
 class HppGateway extends Gateway
 {
@@ -31,6 +32,14 @@ class HppGateway extends Gateway
     public function createSession(array $data = [])
     {
         return $this->createRequest(CreateSessionRequest::class, $data);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function updateSession(array $data = [])
+    {
+        return $this->createRequest(UpdateSessionRequest::class, $data);
     }
 
     /**
