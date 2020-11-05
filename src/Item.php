@@ -8,9 +8,25 @@ final class Item extends \Omnipay\Common\Item implements ItemInterface
     /**
      * @inheritDoc
      */
+    public function getImageUrl()
+    {
+        return $this->getParameter('image_url');
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getMerchantData()
     {
         return $this->getParameter('merchant_data');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getProductUrl()
+    {
+        return $this->getParameter('product_url');
     }
 
     /**
@@ -54,11 +70,27 @@ final class Item extends \Omnipay\Common\Item implements ItemInterface
     }
 
     /**
+     * @param string $imageUrl
+     */
+    public function setImageUrl($imageUrl)
+    {
+        $this->setParameter('image_url', $imageUrl);
+    }
+
+    /**
      * @param string $data
      */
     public function setMerchantData($data)
     {
         $this->setParameter('merchant_data', $data);
+    }
+
+    /**
+     * @param string $productUrl
+     */
+    public function setProductUrl($productUrl)
+    {
+        $this->setParameter('product_url', $productUrl);
     }
 
     /**

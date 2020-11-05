@@ -33,6 +33,9 @@ trait ItemDataTrait
             $orderLines[] = [
                 'type' => $item->getType(),
                 'name' => $item->getName(),
+                // TODO: Check if URL validation is required for the `image_url` and `product_url` fields.
+                'image_url' => $item->getImageUrl() ?: null,
+                'product_url' => $item->getProductUrl() ?: null,
                 'quantity' => $item->getQuantity(),
                 'tax_rate' => null === $taxRate ? 0 : (int) ($item->getTaxRate() * 100),
                 'total_amount' => (int) $totalAmount->getAmount(),
